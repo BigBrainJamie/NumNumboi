@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>money</title>
+   </head>
+   <body>
+
+      <button onclick= "upgrade()">10 money for 1 more production per second!</button>
+      <button onclick= "upgrade1()">50 money for 7 more production per second!</button>
+      <button onclick= "upgrade2()">200 money for 30 more production per second!</button>
+      <button onclick= "upgrade3()">50000 money for 1000 more production per second!</button>
+      <button onclick= "upgrade4()" id = "up4">1e9 money for 1e7 more production per second!</button>   
+      <button id = "prestige" onclick = "pp1()">check the money you need for prestige point which gives you a multiplier!</button>
+
+      <canvas id="thing" width="450" height="320" style="background-color: white; display: block; margin: 0 auto"></canvas>
+      <script type="text/javascript">
+        var canvas = document.getElementById("thing");
+        var ctx = canvas.getContext("2d"); 
+        var money=0;
+        var up=1;
+        var pp=0;
+        var required = Math.pow(10,15+pp)
+
+        function drawpp()
+        {
+            ctx.fillStyle = "black";
+            ctx.fillText("Prestige point you currently have: "+pp, 5, 120);          
+        }
+
+        function money1()
+        {
+            money =money+up/2 * (1+pp);
+        }
+
+        
+        function drawUp()
+        {
+
+            ctx.fillStyle = "black";
+            ctx.fillText("money you are producing a second: "+up, 5, 80);
+        }
+
+
+
+        function upgrade()
+        {
+ 
+            if (money >= 10)
+            {
+                up += 1;
+                money -= 10;
+            }
+
+        }
+        
+        function upgrade1()
+        {
+            if (money >= 50)
+            {
+                up +=7;
+                money -=50;
+            }
+        }
+        
+        function upgrade2()
+        {
+            if (money >= 200)
+            {
+                up +=30;
+                money -=200;
+            }
+        }
+
+        function upgrade3()
+        {
+            if (money >= 50000)
+            {
+                up +=1000;
+                money -=50000;
+            }
+        }
+
+        function pp1()
+        {
+            if (money >= required)
+            {
+               pp += 1
+               money = 0
+               up = 1
+            }
+
+            else if (money <= required)
+            {
+                monwy = money
+            }
+        }
+
+        function upgrade4()
+        {
+            if (money >= 1e9)
+            {
+                up += 1e7
+                money -= 1e9
+            }
+            
+            else if (money <= 1e9)
+            {
+                money = money
+            }
+        }
+
+        
+        function drawMoney()
+        {
+
+            ctx.fillStyle = "black";
+            ctx.fillText("money: "+money, 5, 60);
+        }
+        function drawRequired()
+        {
+
+            ctx.fillStyle = "black";
+            ctx.fillText("required money for the prestige: " +required, 5, 150);
+        }
+
+        function main()
+        {   
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            money1();
+            drawMoney();
+            drawUp();
+            drawpp();
+            drawRequired();
+
+        }
+        setInterval(main, 500)
+
+      </script>
+   </body>
+</html>
